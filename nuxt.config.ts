@@ -9,7 +9,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiEndpoint: ''
+      apiEndpoint: '',
+      
+      anonKey: '',
+      supabaseUrl: ''
     },
   },
 
@@ -30,12 +33,16 @@ export default defineNuxtConfig({
     },
   },
 
+  supabase: {
+    redirect: false
+  },
+
   css: [
     // See https://nuxt.com/docs/guide/going-further/layers#relative-paths-and-aliases
     join(currentDir, './assets/css/global.css'),
   ],
 
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxt/eslint', '@pinia/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/supabase'],
 
   eslint: {
     // Additional configs

@@ -1,28 +1,32 @@
 <script setup lang="ts">
-import usePostsStore from '~/stores/posts/index';
+import useSmoothiesStore from '~/stores/smoothies/index';
 
 definePageMeta({
   layout: 'default',
 });
 
-const postsStore = usePostsStore();
+const smoothiesStore = useSmoothiesStore();
 
 await useAsyncData('posts', async () => {
-  await postsStore.fetchAllPosts();
+  await smoothiesStore.fetchAllSmoothies();
 
-  return postsStore.posts;
+  return smoothiesStore.smoothiesList;
 });
 </script>
 
 <template>
   <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    <div v-for="post in postsStore.posts" :key="post.id" class="rounded-md border border-gray-400 px-4 py-6">
+    <div
+      v-for="post in smoothiesStore.smoothiesList"
+      :key="post.id"
+      class="rounded-md border border-gray-400 px-4 py-6"
+    >
       <h2 class="mb-2 text-sm font-semibold leading-4">
         {{ post.title }}
       </h2>
 
       <p class="text-muted-foreground">
-        {{ post.body }}
+        {{ post.method }}
       </p>
     </div>
   </div>
