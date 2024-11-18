@@ -42,6 +42,12 @@ const onUpdateSmoothieClick = async (smoothie: Smoothie) => {
   clickedSmoothie.value = smoothie;
   toggleCreateModal();
 };
+
+const onDeleteSmoothieClick = async (smoothie: Smoothie) => {
+  await smoothiesStore.deleteSmoothie(smoothie.id);
+
+  await refresh();
+};
 </script>
 
 <template>
@@ -63,6 +69,7 @@ const onUpdateSmoothieClick = async (smoothie: Smoothie) => {
       :key="smoothie.id"
       :smoothie="smoothie"
       @onEditClick="onUpdateSmoothieClick"
+      @onDeleteClick="onDeleteSmoothieClick"
     />
   </div>
 </template>
