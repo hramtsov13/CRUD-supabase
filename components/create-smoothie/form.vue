@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import useSmoothiesStore from '@/stores/smoothies';
 import { toTypedSchema } from '@vee-validate/zod';
+import type { Smoothie } from '~/stores/smoothies/types';
 import { useForm, useIsFormValid } from 'vee-validate';
 import * as z from 'zod';
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
+interface Props {
+  smoothie: Smoothie | null;
+}
+
 const emit = defineEmits(['onSubmit']);
+
+const props = withDefaults(defineProps<Props>(), {
+  smoothie: null,
+});
 
 const formSchema = toTypedSchema(
   z.object({
@@ -18,17 +27,14 @@ const formSchema = toTypedSchema(
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
   validationSchema: formSchema,
+  initialValues: props.smoothie,
 });
 
 const isFormValid = useIsFormValid();
 
-const smoothiesStore = useSmoothiesStore();
-
 const onSubmit = handleSubmit(async (values) => {
-  await smoothiesStore.createSmoothie({ ...values });
-
+  emit('onSubmit', values);
   resetForm();
-  emit('onSubmit');
 });
 </script>
 

@@ -3,16 +3,21 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 
 import type { Props } from './types';
 
+const emit = defineEmits(['onEditClick']);
 const { smoothie } = defineProps<Props>();
 </script>
 
 <template>
   <NuxtLink :href="`/${smoothie.id}`">
     <Card class="relative transition-colors duration-150 hover:cursor-pointer hover:border-purple-500">
-      <CardHeader>
-        <CardTitle class="h-16">
+      <CardHeader class="items-top flex-row justify-between">
+        <CardTitle class="h-16 max-w-[60%]">
           {{ smoothie.title }}
         </CardTitle>
+
+        <Button @click.prevent variant="outline" size="icon" @click="emit('onEditClick', smoothie)">
+          <IconsEditIcon class="h-6 w-6" />
+        </Button>
       </CardHeader>
 
       <CardContent class="h-16">

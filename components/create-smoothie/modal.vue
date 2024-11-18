@@ -1,15 +1,22 @@
 <script setup lang="ts">
+import type { Smoothie } from '~/stores/smoothies/types';
+
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 import Form from './form.vue';
 
 interface Props {
   isOpen: boolean;
+  smoothie: Smoothie | null;
 }
 
 const emit = defineEmits(['onSubmit', 'onClose']);
 
-const { isOpen } = defineProps<Props>();
+const { isOpen, smoothie } = defineProps<Props>();
+
+const onSubmit = (values: any) => {
+  emit('onSubmit', values);
+};
 </script>
 
 <template>
@@ -20,7 +27,7 @@ const { isOpen } = defineProps<Props>();
         <DialogDescription> Click save when you're done. </DialogDescription>
       </DialogHeader>
 
-      <Form @onSubmit="emit('onSubmit')" />
+      <Form :smoothie="smoothie" @onSubmit="onSubmit" />
     </DialogContent>
   </Dialog>
 </template>
