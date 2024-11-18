@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import useSmoothiesStore from '~/stores/smoothies/index';
 
-definePageMeta({
-  layout: 'default',
-});
-
 const smoothiesStore = useSmoothiesStore();
 
-await useAsyncData('posts', async () => {
+await useAsyncData('smoothies', async () => {
   await smoothiesStore.fetchAllSmoothies();
 
   return smoothiesStore.smoothiesList;
@@ -15,6 +11,10 @@ await useAsyncData('posts', async () => {
 </script>
 
 <template>
+  <CreateSmoothieModal />
+
+  <Separator class="my-10" label="Smoothies" />
+
   <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     <Smoothie v-for="smoothie in smoothiesStore.smoothiesList" :key="smoothie.id" :smoothie="smoothie" />
   </div>

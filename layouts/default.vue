@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { NAV_ITEMS } from '@/constants/nav';
-import { cn } from '@/lib/utils';
+// import { NAV_ITEMS } from '@/constants/nav';
+// import { cn } from '@/lib/utils';
 
-const route = useRoute();
+// const route = useRoute();
 
-const isLinkActive = (link: string) => {
-  return link === route.path;
-};
+// const isLinkActive = (link: string) => {
+//   return link === route.path;
+// };
 </script>
 
 <template>
-  <header class="bg-slate-900">
+  <!-- <header class="bg-slate-900">
     <div class="container">
       <nav class="space-x-4 py-6">
         <NuxtLink
@@ -24,7 +24,7 @@ const isLinkActive = (link: string) => {
         </NuxtLink>
       </nav>
     </div>
-  </header>
+  </header> -->
 
   <div class="container py-10">
     <slot />

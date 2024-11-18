@@ -42,22 +42,17 @@ export default defineNuxtConfig({
     join(currentDir, './assets/css/global.css'),
   ],
 
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/supabase'],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/supabase', '@vee-validate/nuxt'],
+
+  veeValidate: {
+    autoImports: true
+  },
 
   eslint: {
     // Additional configs
-    
   },
 
   shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
-    prefix: 'CN',
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
     componentDir: './components/ui',
   },
 

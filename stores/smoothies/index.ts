@@ -27,6 +27,15 @@ const useSmoothiesStore = defineStore({
         this.smoothiesList = data;
       }
     },
+
+    createSmoothie: async function(newSmoothie: any) {
+      console.log('newSmoothie: ', newSmoothie);
+      const supabase = useSupabaseClient()
+
+      await supabase
+        .from('smoothies')
+        .insert({...newSmoothie})
+    }
   },
 });
 
