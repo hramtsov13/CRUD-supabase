@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import useSmoothiesStore from '~/stores/smoothies/index';
 
+const CreateSmoothieModal = defineAsyncComponent(() => import('@/components/create-smoothie/modal.vue'));
+
 const smoothiesStore = useSmoothiesStore();
 
 const { refresh } = await useAsyncData('smoothies', async () => {

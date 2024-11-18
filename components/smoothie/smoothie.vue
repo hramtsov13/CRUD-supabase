@@ -10,7 +10,7 @@ const { smoothie } = defineProps<Props>();
   <NuxtLink :href="`/${smoothie.id}`">
     <Card class="relative transition-colors duration-150 hover:cursor-pointer hover:border-purple-500">
       <CardHeader>
-        <CardTitle class="h-12">
+        <CardTitle class="h-16">
           {{ smoothie.title }}
         </CardTitle>
       </CardHeader>

@@ -32,7 +32,7 @@ const useSmoothiesStore = defineStore({
 
       await supabase
         .from('smoothies')
-        .insert({...newSmoothie})
+        .insert(newSmoothie)
     },
 
     findSmoothie: async function(id: number) {
@@ -52,6 +52,24 @@ const useSmoothiesStore = defineStore({
       }
 
       return data;
+    },
+
+    deleteSmoothie: async function(id: number) {
+      const supabase = useSupabaseClient()
+
+      await supabase
+        .from('smoothies')
+        .delete()
+        .eq('id', id)      
+    },
+
+    updateSmoothie: async function(id: number, updatedSmoothie: Smoothie) {
+      const supabase = useSupabaseClient()
+
+      await supabase
+        .from('smoothies')
+        .update(updatedSmoothie as never)
+        .eq('id', id)
     }
   },
 });
