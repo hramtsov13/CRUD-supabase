@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { State } from './types';
+import type { Smoothie, State } from './types';
 
 const useSmoothiesStore = defineStore({
   id: 'posts',
@@ -20,7 +20,6 @@ const useSmoothiesStore = defineStore({
 
       if (error) {
         this.smoothiesList = []
-        console.log(error)
       }
 
       if (data) {
@@ -34,6 +33,25 @@ const useSmoothiesStore = defineStore({
       await supabase
         .from('smoothies')
         .insert({...newSmoothie})
+    },
+
+    findSmoothie: async function(id: number) {
+      const supabase = useSupabaseClient()
+      const router = useRouter()
+
+      const { data, error } = await supabase
+        .from('smoothies')
+        .select()
+        .eq('id', id) // finds equal to the param
+        .single()
+              
+      if (error) {
+        router.replace('/')
+
+        return
+      }
+
+      return data;
     }
   },
 });
