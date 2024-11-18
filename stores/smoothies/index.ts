@@ -29,7 +29,6 @@ const useSmoothiesStore = defineStore({
     },
 
     createSmoothie: async function(newSmoothie: any) {
-      console.log('newSmoothie: ', newSmoothie);
       const supabase = useSupabaseClient()
 
       await supabase

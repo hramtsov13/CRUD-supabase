@@ -3,15 +3,29 @@ import useSmoothiesStore from '~/stores/smoothies/index';
 
 const smoothiesStore = useSmoothiesStore();
 
-await useAsyncData('smoothies', async () => {
+const { refresh } = await useAsyncData('smoothies', async () => {
   await smoothiesStore.fetchAllSmoothies();
 
   return smoothiesStore.smoothiesList;
 });
+
+const isCreateModalVisible = ref(false);
+
+const toggleCreateModal = () => {
+  isCreateModalVisible.value = !isCreateModalVisible.value;
+};
+
+const onNewSmoothieCreated = async () => {
+  toggleCreateModal();
+  await refresh();
+};
 </script>
 
 <template>
-  <CreateSmoothieModal />
+  <div>
+    <Button @click="toggleCreateModal">Add new smoothie</Button>
+    <CreateSmoothieModal :isOpen="isCreateModalVisible" @onSubmit="onNewSmoothieCreated" @onClose="toggleCreateModal" />
+  </div>
 
   <Separator class="my-10" label="Smoothies" />
 

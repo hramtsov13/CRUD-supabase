@@ -6,6 +6,8 @@ import * as z from 'zod';
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
+const emit = defineEmits(['onSubmit']);
+
 const formSchema = toTypedSchema(
   z.object({
     title: z.string().min(2).max(50),
@@ -26,6 +28,7 @@ const onSubmit = handleSubmit(async (values) => {
   await smoothiesStore.createSmoothie({ ...values });
 
   resetForm();
+  emit('onSubmit');
 });
 </script>
 
